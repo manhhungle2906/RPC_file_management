@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package filesharing;
+
+// Authentication Service
+service AuthService {
+    rpc Authenticate(UserRequest) returns (AuthResponse); // Missing semicolon fixed
+}
+
+message UserRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message AuthResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+// File Storage Service
+service FileStorageService {
+    rpc UploadFile(FileRequest) returns (FileResponse);
+    rpc DownloadFile(FileRequest) returns (FileResponse);
+}
+
+message FileRequest {
+    string username = 1;
+    string filename = 2;
+    string content = 3;
+}
+
+message FileResponse {
+    bool success = 1;
+    string message = 2;
+}
